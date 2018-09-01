@@ -1,0 +1,60 @@
+html,
+body,
+p,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  color: #999;
+  font-family: '宋体';
+}
+ul,
+li {
+  list-style: none;
+}
+a,{
+  text-decoration: none;
+  color: #000000;
+}
+body,
+html {
+  min-width: 320px;
+}
+.clearfix::after,.clearfix::before{
+	content: "";
+	height: 0;
+	display: block;
+	visibility: hidden;
+	clear:both;
+}
+.tc{
+	text-align: center;
+}
+.mt10{
+	margin-top: 10px;
+}
+.fs18{
+	font-size: 1rem;
+}
+.fs14{
+	font-size: 0.7rem;
+}
+.p10{
+	padding: 10px 0;
+}
+.p20{
+	padding: 20px 0;
+}
+.p5{
+	padding: 5px;
+}
+.mtb10{
+	margin: 10px 0;
+}
