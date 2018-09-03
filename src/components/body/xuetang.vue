@@ -38,11 +38,14 @@
 			<div class="row">
 				<a href="javascript:;" class="course-box col-6 mtb10" v-for="(item,index) in course">
 					<div class="card" style="">
-						<img class="card-img-top" v-bind:src="item.img" v-bind:alt="item.alt">
+						<img class="card-img-top" v-bind:src="item.cover.small" v-bind:alt="item.alt">
 						<div class="list-group">
 							<p class="course-title p5 fs14">{{item.title}}</p>
 							<div class="join_people_box list-group-item d-flex justify-content-between align-items-center">
-								<em class="join_people"></em>
+								<div>
+									<em class="join_people"></em>
+									<span>{{item.studentNum}}</span>
+								</div>
 								<span class="badge badge-default course-free">免费</span>
 							</div>
 						</div>
@@ -57,10 +60,7 @@
 </template>
 
 <script>
-import vue from 'vue'
-import axios from 'axios'
 import categoryTitle from './../head/categoryTitle'
-vue.use(axios)
 
 export default{
 	name:'course',
@@ -69,14 +69,7 @@ export default{
 	},
 	data(){
 		return {
-			course:[
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'},
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'},
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'},
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'},
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'},
-			{id:0,img:'./static/img/default.jpeg',alt:"超深竖井关键技术",title:'超深竖井关键技术'}
-			],
+			course:[],
 			cateTitle:{
 				largeTitle:'矿冶学堂',
 				desc:"学堂精选行业前沿资源与科技与你共享",
@@ -89,33 +82,19 @@ export default{
 	methods:{
 		getData(){
 			this.$axios({
-				method:'get',
-				url:'/kyy/api/course_sets',
+				method:'GET',
+				url:'/api/course_sets',
 				params:{
-					categoryId:1,
+					categoryId:4,
 					limit:12,
 					offset:0,
 					sort:'-createdTime',
-					type:'normal',
+					type:'normal'
 				},
 				headers:{
 					'Accept':'application/vnd.edusoho.v2+json',
-					'content-type':'application/x-www-form-urlencoded',
 				}
-			}).then( res => console.log(res))
-			// axios.get('/kyy/api/course_sets',{
-			// 	params:{
-			// 		categoryId:1,
-			// 		limit:12,
-			// 		offset:0,
-			// 		sort:'-createdTime',
-			// 		type:'normal',
-			// 	},
-			// 	headers:{
-			// 		'Accept':'application/vnd.edusoho.v2+json',
-
-			// 	}
-			// }).then(res => console.log(res))
+			}).then( res => this.course = res.data.data)
 }
 }
 };
@@ -140,6 +119,9 @@ a:hover{
 }
 .course-title{
 	margin-bottom:0;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 .join_people_box{
 	border:none;
